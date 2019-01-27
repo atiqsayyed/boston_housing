@@ -13056,25 +13056,6 @@ ul.typeahead-list  > li > a.pull-right {
 .ansi-bold { font-weight: bold; }
 
     </style>
-<style type="text/css">
-    body[data-notebook-name] > #header #header-container:not(.show-panel), /* body has data-notebook-name attribute when 
-a notebook is open. this rule won't be applied when the notebook is not open (in 404 view for example) */
-body[data-notebook-name] #menubar-container #maintoolbar:not(.show-panel),
-body[data-notebook-name] #menubar-container ul.navbar-nav:not(.show-panel) {
-  display: none;
-}
-
-#menubar.only-panel #menus.navbar-default {
-    background: #fff;
-    border-color: #fff;
-}
-
-.toolbar.with-statusbar{
-    margin-top: 3px;
-    margin-bottom: 0;
-}
-
-    </style>
 
 
 <style type="text/css">
@@ -13313,9 +13294,9 @@ Standard deviation of prices: $165171.13154429474
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>The prices of home is directly related to the number of rooms(area of the house). The more the <code>RM</code> the higher the price of the home.</p>
-<p>Higher the <code>LSTAT</code> the lower would be the price of the home. so home with <code>LSTAT</code> of <code>15</code> would have higher price than home with <code>LSTAT</code> of <code>20</code></p>
-<p>Lower the <code>PTRATIO</code> the better it is,as the each teacher would have less students to look after. so home with <code>PTRATIO</code> 10 would be having higher than home with <code>PTRATIO</code> value of 20.</p>
+<p>The prices of home is directly related to the number of rooms(area of the house). The more the <code>RM</code> the higher the price of the home. The addition of rooms means bigger space in terms of area which internally is directly related with the price of the home.</p>
+<p>Higher the <code>LSTAT</code> the lower would be the price of the home because the number of low class workers in the area increases which becomes less attractive to people belonging to higher class. so home with <code>LSTAT</code> of <code>15</code> would have higher price than home with <code>LSTAT</code> of <code>20</code></p>
+<p>Lower the <code>PTRATIO</code> the better it is,as the each teacher would have less students to look after and every parent would want that teachers should personally attend to students, so if number of students are less in class then teachers could pay more attention to individual students. so home with <code>PTRATIO</code> 10 would be having higher than home with <code>PTRATIO</code> value of 20.</p>
 
 </div>
 </div>
@@ -13445,8 +13426,9 @@ Standard deviation of prices: $165171.13154429474
 <li>Would you consider this model to have successfully captured the variation of the target variable? </li>
 <li>Why or why not?</li>
 </ul>
-<p><strong> Hint: </strong>  The R2 score is the proportion of the variance in the dependent variable that is predictable from the independent variable. In other words:</p>
+<p><strong> Hint: </strong></p>
 <ul>
+<li>The R2 score is the proportion of the variance in the dependent variable that is predictable from the independent variable. In other words:</li>
 <li>R2 score of 0 means that the dependent variable cannot be predicted from the independent variable.</li>
 <li>R2 score of 1 means the dependent variable can be predicted from the independent variable.</li>
 <li>R2 score between 0 and 1 indicates the extent to which the dependent variable is predictable. An </li>
@@ -13461,8 +13443,11 @@ Standard deviation of prices: $165171.13154429474
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>With the score of 0.923 the model has successfully captured the variation of target variable.</li>
-<li>because 92.3% of proportionof dependent variable can be predicted from independent variable</li>
+<li><p>R^2 is a measure of how well the linear model fits the observation set. The higher the R^2 value the closer it is to the regression line meaning closer it is to actual data with minimal variance.</p>
+</li>
+<li><p>With the score of 0.923 the model has successfully captured the variation of target variable.</p>
+</li>
+<li>because 92.3% of proportion of dependent variable can be predicted from independent variable</li>
 </ul>
 
 </div>
@@ -13618,6 +13603,7 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ul>
+<li>In Graph where max_depth=1, one can clearly see when the lines converge that the training and the testing score is less, no matter how much data is fed to the model, it'll fail to represent underlying relationship.</li>
 <li>Second graph on the right with max_depth=3</li>
 <li>The score doesn't change by much after adding more training points and eventually the testing curve would coverge around 0.8</li>
 <li>No, once the testing and training curve converge there's no benefit the model can get rather than wasting the training effort by adding more data one should stop at convergence.</li>
@@ -13744,8 +13730,17 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ul>
-<li>Grid Search is technique to find the value of linear and poloymial kernel with different gamma (Hyperparameters).
-Basically making a table for all the possible combination and choose the best one</li>
+<li><p>Input to GridSearch is the possible value of each hyperparameter along with the performance metrics</p>
+</li>
+<li><p>Output of GridSearch is the combination of hyperparameter which gave the best score when ran against the performance metrics</p>
+</li>
+<li><p>We need the performance metrics to measure the R^2 score of cross validation set against given combination of hyper parameters</p>
+</li>
+<li><p>The Grid specifies the different combination of hyperparameters.</p>
+</li>
+<li><p>Grid Search is technique to find the value of linear and poloymial kernel with different gamma (Hyperparameters).
+Basically making a table for all the possible combination and choose the best one</p>
+</li>
 <li>Goal of this method is to find the best combination to be used for a model with multiple parameter</li>
 </ul>
 
@@ -13772,6 +13767,8 @@ Basically making a table for all the possible combination and choose the best on
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ul>
+<li>Divide the data into k buckets and for each bucket keep the 0th for validation and train your machine learning model using the cross validation training set <code>K-1</code> and calculate the accuracy of your model by validating the predicted results against the validation set.</li>
+<li>Each run would give you the the score for the model, the scores are collected for each model and summarized.</li>
 <li>In K-fold cross validation training technique, the training data is divided into K buckets.</li>
 <li>Model is trained K times each time with different bucket as the testing set</li>
 <li>Model being trained k times, every point gets a chance to be in the testing and training set in different runs. As a result the chance of variance reduces when tested with real data. In case of Grid Search the chance of variance could be higher because being trained on specific dataset, it'll perform poorly with real data.</li>
@@ -13810,7 +13807,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -13825,7 +13822,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
     <span class="c1"># Create cross-validation sets from the training data</span>
     <span class="c1"># sklearn version 0.18: ShuffleSplit(n_splits=10, test_size=0.1, train_size=None, random_state=None)</span>
     <span class="c1"># sklearn versiin 0.17: ShuffleSplit(n, n_iter=10, test_size=0.1, train_size=None, random_state=None)</span>
-    <span class="n">cv_sets</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">cv_sets</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     
     <span class="c1"># TODO: Create a decision tree regressor object</span>
     <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
@@ -13851,6 +13848,33 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-1-e78700da61fc&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> sklearn<span class="ansi-blue-fg">.</span>metrics <span class="ansi-green-fg">import</span> make_scorer
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> sklearn<span class="ansi-blue-fg">.</span>tree <span class="ansi-green-fg">import</span> DecisionTreeRegressor
+<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">from</span> sklearn<span class="ansi-blue-fg">.</span>model_selection <span class="ansi-green-fg">import</span> GridSearchCV
+<span class="ansi-green-intense-fg ansi-bold">      5</span> 
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13873,7 +13897,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fit the training data to the model using grid search</span>
@@ -13896,9 +13920,18 @@ For the <code>fit_model</code> function in the code cell below, you will need to
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Parameter &#39;max_depth&#39; is 4 for the optimal model.
-</pre>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-2-ede909fc46d6&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># Fit the training data to the model using grid search</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>reg <span class="ansi-blue-fg">=</span> fit_model<span class="ansi-blue-fg">(</span>X_train<span class="ansi-blue-fg">,</span> y_train<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> 
+<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-red-fg"># Produce the value for &#39;max_depth&#39;</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Parameter &#39;max_depth&#39; is {} for the optimal model.&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>reg<span class="ansi-blue-fg">.</span>get_params<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;max_depth&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;fit_model&#39; is not defined</pre>
 </div>
 </div>
 
@@ -13912,6 +13945,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 <p><strong> Hint: </strong> The answer comes from the output of the code snipped above.</p>
 <p><strong>Answer: </strong></p>
 <ul>
+<li>As compared to question 6, the answer is similar to what i guessed in the question and comes pretty close to the prediction of our optimal model.</li>
 <li>Parameter 'max_depth' is 4 for the optimal model.</li>
 </ul>
 
